@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import Images from "./images";
 
 function Header() {
-  const [searchTag, setSearchTag] = useState("");
+  const [searchTag, setSearchTag] = useState("jungle");
   const [suggestions, setSuggestions] = useState([
     "Jungle",
     "lion",
