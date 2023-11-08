@@ -21,7 +21,7 @@ const style = {
 function Images({ searchTag }) {
   const [open, setOpen] = useState(false);
   const [photos, setPhotos] = useState([]);
-  const [tag, setTag] = useState("jungle");
+  const [tag, setTag] = useState("");
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -35,20 +35,38 @@ function Images({ searchTag }) {
   useEffect(() => {
     setTag(searchTag);
     setLoading(true);
-    fetch(
-      `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${
-        import.meta.env.VITE_API_KEY
-      }&tags=${tag}&per_page=20&page=${page}&format=json&nojsoncallback=1`,
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setPhotos((prevPhotos) => [...prevPhotos, ...data.photos.photo]);
-        setLoading(false);
-        if (data.photos.page >= data.photos.pages) {
-          setHasMore(false);
-        }
-      })
-      .catch((error) => console.error(error));
+
+    if (tag.length > 0) {
+      fetch(
+        `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${
+          import.meta.env.VITE_API_KEY
+        }&tags=${tag}&per_page=20&page=${page}&safe_search='1'&privacy_filter='1'&format=json&nojsoncallback=1`,
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setPhotos((prevPhotos) => [...data.photos.photo]);
+          setLoading(false);
+          if (data.photos.page >= data.photos.pages) {
+            setHasMore(false);
+          }
+        })
+        .catch((error) => console.error(error));
+    } else {
+      fetch(
+        `https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=${
+          import.meta.env.VITE_API_KEY
+        }&tags=${tag}&per_page=20&page=${page}&safe_search=3&privacy_filter=1&format=json&nojsoncallback=1`,
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          setPhotos((prevPhotos) => [...prevPhotos, ...data.photos.photo]);
+          setLoading(false);
+          if (data.photos.page >= data.photos.pages) {
+            setHasMore(false);
+          }
+        })
+        .catch((error) => console.error(error));
+    }
   }, [tag, searchTag, page]);
 
   const observer = useRef(

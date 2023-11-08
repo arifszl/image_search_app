@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import Images from "./images";
 
 function Header() {
-  const [searchTag, setSearchTag] = useState("jungle");
+  const [searchTag, setSearchTag] = useState("");
   const [suggestions, setSuggestions] = useState([
     "Jungle",
     "lion",
@@ -19,11 +19,13 @@ function Header() {
   const handleSuggestionClick = (suggestion) => {
     setSearchTag(suggestion);
   };
+
   return (
     <>
       <header className="bg-[#07051b] flex flex-col items-center sticky top-0 justify-center p-4 mb-5">
         <div className="text-red-700 font-bold text-lg mb-4">
           ORI <span className="text-white">_Image</span>{" "}
+          <span className="text-red-700">_Search</span>{" "}
         </div>
         <div className="flex flex-row">
           <div className="flex items-center  bg-white w-[500px] rounded-full px-4 py-2">
