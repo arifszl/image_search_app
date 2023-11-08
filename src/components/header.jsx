@@ -6,6 +6,7 @@ import Images from "./images";
 function Header() {
   const [searchTag, setSearchTag] = useState("jungle");
   const [suggestions, setSuggestions] = useState([
+    "India",
     "Jungle",
     "lion",
     "technology",
@@ -28,7 +29,7 @@ function Header() {
           <span className="text-red-700">_Search</span>{" "}
         </div>
         <div className="flex flex-row">
-          <div className="flex items-center  bg-white w-[500px] rounded-full px-4 py-2">
+          <div className="flex items-center bg-white w-full md:w-[500px] rounded-full px-4 py-2">
             <SearchIcon className="text-gray-500 mr-2" />
             <input
               ref={imageRef}
@@ -47,11 +48,11 @@ function Header() {
           </Button>
         </div>
         {suggestions.length > 0 && (
-          <div className="text-black  flex flex-row mt-5">
+          <div className="grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-5">
             {suggestions.map((suggestion, index) => (
               <div
                 key={index}
-                className="border border-slate-600 min-w-[60px] bg-red-600 flex justify-center items-center cursor-pointer shadow-xl rounded-sm mr-4"
+                className="border border-slate-600 min-w-[60px]  bg-red-600 flex justify-center items-center cursor-pointer shadow-xl rounded-sm mr-4"
                 onClick={() => handleSuggestionClick(suggestion)}
               >
                 {suggestion}
@@ -60,7 +61,7 @@ function Header() {
           </div>
         )}
       </header>
-      <hr className="sticky top-[165px]" />
+
       <Images searchTag={searchTag} />
     </>
   );

@@ -112,7 +112,7 @@ function Images({ searchTag }) {
         </Box>
       </Modal>
 
-      <div className="grid grid-cols-5 gap-4 bg-[#060c18] ml-3 mr-3 p-3">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 ml-2 mr-2">
         {photos.map((photo, index) => (
           <img
             onClick={() => {
