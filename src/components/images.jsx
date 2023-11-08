@@ -38,7 +38,7 @@ function Images({ searchTag }) {
 
     if (tag.length > 0) {
       fetch(
-        `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key="16692ddef0eebdf2b20c6ec7a2575fa7"
+        `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=16692ddef0eebdf2b20c6ec7a2575fa7
         &tags=${tag}&per_page=20&page=${page}&safe_search='1'&privacy_filter='1'&format=json&nojsoncallback=1`,
       )
         .then((response) => response.json())
@@ -52,7 +52,7 @@ function Images({ searchTag }) {
         .catch((error) => console.error(error));
     } else {
       fetch(
-        `https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key="16692ddef0eebdf2b20c6ec7a2575fa7"&tags=${tag}&per_page=20&page=${page}&safe_search=3&privacy_filter=1&format=json&nojsoncallback=1`,
+        `https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=16692ddef0eebdf2b20c6ec7a2575fa7&tags=${tag}&per_page=20&page=${page}&safe_search=3&privacy_filter=1&format=json&nojsoncallback=1`,
       )
         .then((response) => response.json())
         .then((data) => {
